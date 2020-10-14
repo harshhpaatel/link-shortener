@@ -1,13 +1,8 @@
-import React from 'react';
-import './css/App.css';
-import LinkShortener from './components/LinkShortener'
+import React from "react";
+import LinkShortener from "./components/LinkShortener/LinkShortener";
 
 function App() {
-  return (
-    <div className="App">
-      <LinkShortener/>
-    </div>
-  );
+  return <LinkShortener />;
 }
 
 export default App;
