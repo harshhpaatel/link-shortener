@@ -10,7 +10,11 @@ class AllLinks extends Component {
   render() {
     return (
       <div>
-        <LinkContainer />
+        <LinkContainer
+          longURL="https://www.figma.com/file/TdHagLIG2HXl0CsNgb0dql/Link-Shortener?node-id=2%3A1"
+          linkID="go.harshpatel.ca/figmaproject"
+          clicksCount="12"
+        />
       </div>
     );
   }
