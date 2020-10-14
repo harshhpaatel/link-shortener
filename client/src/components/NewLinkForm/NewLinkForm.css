@@ -1,0 +1,35 @@
+.form-box {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 35px 45px;
+  border-radius: 30px;
+}
+
+.form-input {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.form-input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #cacaca;
+  opacity: 1; /* Firefox */
+}
+
+.form-input:focus {
+  border-color: #ff375b;
+}
+
+.form-button {
+  color: #fff;
+  background-color: #ff375b;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  height: 100%;
+}
+
+.form-button:hover {
+  color: #fff !important;
+  background-color: #ff375cb9;
+}
