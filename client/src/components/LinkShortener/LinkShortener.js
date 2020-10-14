@@ -15,7 +15,7 @@ class LinkShortener extends Component {
         <div className="container mt-5">
           <NewLinkForm />
         </div>
-        <div className="container">
+        <div className="container mt-5">
           <AllLinks />
         </div>
       </div>

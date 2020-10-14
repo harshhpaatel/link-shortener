@@ -7,7 +7,12 @@ class LinkContainer extends Component {
     this.state = {};
   }
   render() {
-    return <div className="link-container-box">hi</div>;
+    return (
+      <div className="link-container">
+        <div className="link-container-side "></div>
+        <div className="link-container-box">hi</div>
+      </div>
+    );
   }
 }
 
