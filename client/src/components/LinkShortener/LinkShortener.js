@@ -3,8 +3,30 @@ import logo from "../../logo.svg";
 import "./LinkShortener.css";
 import NewLinkForm from "../NewLinkForm/NewLinkForm";
 import AllLinks from "../AllLinks/AllLinks";
+import axios from "axios";
 
 class LinkShortener extends Component {
+  state = {
+    data: [],
+  };
+
+  componentDidMount() {
+    this.getLinks();
+  }
+  getLinks = () => {
+    axios
+      .get("http://localhost:5000/api/collection")
+      .then((response) => {
+        const data = response.data;
+        this.setState({
+          data: data,
+        });
+      })
+      .catch(() => {
+        console.log("error fetching data");
+      });
+  };
+
   render() {
     return (
       <div>
@@ -16,7 +38,7 @@ class LinkShortener extends Component {
           <NewLinkForm />
         </div>
         <div className="container mt-5">
-          <AllLinks />
+          <AllLinks data={this.state.data} />
         </div>
       </div>
     );
