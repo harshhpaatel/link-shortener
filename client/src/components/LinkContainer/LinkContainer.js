@@ -8,7 +8,7 @@ class LinkContainer extends Component {
   }
   render() {
     return (
-      <div className="link-container position-relative">
+      <div className="link-container position-relative mb-3">
         <div className="link-container-side position-absolute"></div>
         <div className="link-container-box position-relative">
           <div className="row">
