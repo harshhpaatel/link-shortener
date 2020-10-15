@@ -24,12 +24,15 @@ class NewLinkForm extends Component {
     });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = (e, props) => {
     e.preventDefault();
-    const validURL = validator.isURL(this.state.url, {
-      require_protocol: true,
-    });
-
+    console.log(e);
+    var validURL = null;
+    if (this.state.url) {
+      validURL = validator.isURL(this.state.url, {
+        require_protocol: true,
+      });
+    }
     if (!validURL) {
       this.setState({
         error: "Check URL Formating. URL must include the http(s) protocol",

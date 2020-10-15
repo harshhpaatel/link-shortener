@@ -23,7 +23,7 @@
 
 .form-button {
   color: #fff;
-  background-color: #ff375b;
+  background-color: rgba(255, 55, 91, 1);
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -34,7 +34,7 @@
 
 .form-button:hover {
   color: #fff !important;
-  background-color: #ff375b;
+  background-color: rgba(255, 55, 91, 0.7);
 }
 
 .error-message {
