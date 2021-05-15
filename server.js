@@ -44,10 +44,14 @@ app.get("/:hash", (req, res) => {
   });
 });
 
+const path = require("path");
+
+app.use(express.static(path.join(__dirname, "client/build")));
+
 // Path
 app.get("/", (req, res) => {
   console.log(URL);
-  res.send("hello world");
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
 // Port

@@ -1,130 +1,117 @@
-import React, { Component } from "react";
-import "./NewLinkForm.css";
-import axios from "axios";
-import validator from "validator";
+import React, { useState } from 'react';
+import './NewLinkForm.css';
+import axios from 'axios';
+import validator from 'validator';
 
-class NewLinkForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+function NewLinkForm(props) {
+  const [url, SetUrl] = useState('');
+  const [customext, SetCustomext] = useState('');
+  const [link, SetLink] = useState('');
+  const [error, SetError] = useState('');
+  const [status, SetStatus] = useState(null);
+
+  function handleChange(e) {
+    if (e.target.name === 'url') {
+      SetUrl(e.target.value);
+    } else if (e.target.name === 'customext') {
+      SetCustomext(e.target.value);
+    }
   }
 
-  state = {
-    url: "",
-    customext: "",
-    link: "",
-    error: "",
-    status: null,
-  };
-
-  handleChange = (e) => {
-    const value = e.target.value;
-    this.setState({
-      [e.target.name]: value,
-    });
-  };
-
-  handleSubmit = (e, props) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    console.log(e);
-    var validURL = null;
-    if (this.state.url) {
-      validURL = validator.isURL(this.state.url, {
+    let validURL = null;
+    if (url) {
+      validURL = validator.isURL(url, {
         require_protocol: true,
       });
     }
     if (!validURL) {
-      this.setState({
-        error: "Check URL Formating. URL must include the http(s) protocol",
-        status: 409,
-      });
+      SetError('Check URL Formating. URL must include the http(s) protocol');
+      SetStatus(409);
     } else {
-      console.log("URL is: ", this.state.url);
-      //POST Values
+      console.log('URL is: ', url);
+      // POST Values.
       axios
-        .post("http://localhost:5000/api/shorten", {
-          url: this.state.url,
-          customext: this.state.customext,
+        .post('http://localhost:5000/api/shorten', {
+          url: url,
+          customext: customext,
         })
         .then((res) => {
           console.log(res.data);
-          this.setState({
-            link: `https://go.harshpatel.ca/${res.data.hash}`,
-          });
-          if (res.data.status == 409) {
-            this.setState({
-              error: "This link already exists",
-              status: 409,
-            });
-          } else if (res.data.status == 400) {
-            this.setState({
-              error: "The custom extension already exists",
-              status: 400,
-            });
+          SetLink(`https://go.harshpatel.ca/${res.data.hash}`);
+          if (res.data.status === 409) {
+            SetError('This link already exists');
+            SetStatus(409);
+          } else if (res.data.status === 400) {
+            SetError('The custom extension already exists');
+            SetStatus(400);
           } else {
-            this.setState({
-              error: null,
-              status: 200,
-            });
+            SetError(null);
+            SetStatus(200);
+            // trigger something here to rerender
           }
         })
         .catch((err) => console.log(err));
     }
+  }
+
+  const ResultText = (props) => {
+    const result = props.result;
+    if (result === 409 || result === 406 || result === 400) {
+      return <p className="mt-3 mb-0 error-message">{error}</p>;
+    } else if (result != null) {
+      return (
+        <p className="mt-3 mb-0 success-message">
+          <span>New Link: </span>
+          <a
+            href={link}
+            className="success-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {link}
+          </a>
+        </p>
+      );
+    } else {
+      return <></>;
+    }
   };
 
-  render() {
-    const ResultText = (props) => {
-      const result = props.result;
-      if (result == 409 || result == 406 || result == 400) {
-        return <p className="mt-3 mb-0 error-message">{this.state.error}</p>;
-      } else if (result != null) {
-        return (
-          <p className="mt-3 mb-0 success-message">
-            <span>New Link: </span>
-            <a href={this.state.link} className="success-link" target="_blank">
-              {this.state.link}
-            </a>
-          </p>
-        );
-      } else {
-        return <div></div>;
-      }
-    };
-
-    return (
-      <div className="form-box">
-        <h3 className="component-title">Create a new link</h3>
-        <form className="mt-4" onSubmit={this.handleSubmit}>
-          <div className="row">
-            <div class="col">
-              <input
-                type="text"
-                className="form-control form-input code"
-                name="url"
-                placeholder="Enter long URL"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="col-4 ">
-              <input
-                type="text"
-                class="form-control form-input code"
-                name="customext"
-                placeholder="Custom extension (optional)"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="px-3">
-              <button type="submit" class="btn form-button">
-                Create
-              </button>
-            </div>
+  return (
+    <div className="form-box">
+      <h3 className="component-title">Create a new link</h3>
+      <form className="mt-4" onSubmit={handleSubmit}>
+        <div className="row">
+          <div className="col">
+            <input
+              type="text"
+              className="form-control form-input code"
+              name="url"
+              placeholder="Enter long URL"
+              onChange={handleChange}
+            />
           </div>
-        </form>
-        <ResultText result={this.state.status} />
-      </div>
-    );
-  }
+          <div className="col-4 ">
+            <input
+              type="text"
+              className="form-control form-input code"
+              name="customext"
+              placeholder="Custom extension (optional)"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="px-3">
+            <button type="submit" className="btn form-button">
+              Create
+            </button>
+          </div>
+        </div>
+      </form>
+      <ResultText result={status} />
+    </div>
+  );
 }
 
 export default NewLinkForm;

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./LinkContainer.css";
+import React, { Component } from 'react';
+import './LinkContainer.css';
 
 class LinkContainer extends Component {
   constructor(props) {
@@ -12,11 +12,10 @@ class LinkContainer extends Component {
         <div className="link-container-side position-absolute"></div>
         <div className="link-container-box position-relative">
           <div className="row">
-            <div class="col">
+            <div className="col">
               <input
                 type="text"
                 className="form-control form-input code"
-                id="name"
                 placeholder="Enter long URL"
                 value={this.props.longURL}
               />
@@ -24,8 +23,7 @@ class LinkContainer extends Component {
             <div className="col-4 ">
               <input
                 type="text"
-                class="form-control form-input code"
-                id="name"
+                className="form-control form-input code"
                 placeholder="Custom extension (optional)"
                 value={this.props.linkID}
               />
