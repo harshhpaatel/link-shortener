@@ -9,7 +9,9 @@ function LinkShortener() {
 
   const getLinks = async () => {
     return axios
-      .get('http://localhost:5000/api/collection')
+      .get(
+        'http://localhost:5001/link-shortener-dradh/us-central1/api/api/collection'
+      )
       .then((response) => {
         return response;
       })

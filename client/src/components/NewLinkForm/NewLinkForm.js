@@ -34,10 +34,13 @@ function NewLinkForm(props) {
       console.log('URL is: ', url);
       // POST Values.
       axios
-        .post('http://localhost:5000/api/shorten', {
-          url: url,
-          customext: customext,
-        })
+        .post(
+          'http://localhost:5001/link-shortener-dradh/us-central1/api/api/shorten',
+          {
+            url: url,
+            customext: customext,
+          }
+        )
         .then((res) => {
           console.log(res.data);
           SetLink(`https://go.harshpatel.ca/${res.data.hash}`);
