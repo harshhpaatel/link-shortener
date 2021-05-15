@@ -24,3 +24,4 @@ yarn-error.log*
 .firebase/hosting.cHVibGlj.cache
 firebase-debug.log
 firebase-debug.log
+*.cache
