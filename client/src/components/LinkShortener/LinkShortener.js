@@ -28,10 +28,10 @@ function LinkShortener() {
     }
   }
 
-  /* export const refreshLinks = () => {
+  function refreshLinks() {
     console.log('refresh Called');
     // fetchData();
-  }; */
+  }
 
   useEffect(() => {
     console.log('Called');
@@ -45,7 +45,7 @@ function LinkShortener() {
         <p className="page-subtitle code">Total Links: {data.length}</p>
       </div>
       <div className="container mt-5">
-        <NewLinkForm />
+        <NewLinkForm updateLinkRender={fetchData} />
       </div>
       <div className="container mt-5">
         <AllLinks data={data} />

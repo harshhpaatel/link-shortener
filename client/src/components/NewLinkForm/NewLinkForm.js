@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './NewLinkForm.css';
 import axios from 'axios';
 import validator from 'validator';
+import refreshLinks from '../LinkShortener/LinkShortener';
 
 function NewLinkForm(props) {
   const [url, SetUrl] = useState('');
@@ -49,7 +50,8 @@ function NewLinkForm(props) {
           } else {
             SetError(null);
             SetStatus(200);
-            // trigger something here to rerender
+            // Updates state in parent component to re-render links
+            props.updateLinkRender();
           }
         })
         .catch((err) => console.log(err));
