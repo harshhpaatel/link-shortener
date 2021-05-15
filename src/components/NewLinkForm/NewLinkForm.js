@@ -43,7 +43,8 @@ function NewLinkForm(props) {
         )
         .then((res) => {
           console.log(res.data);
-          SetLink(`https://go.harshpatel.ca/${res.data.hash}`);
+          let currentUrl = window.location.origin;
+          SetLink(`${currentUrl}/${res.data.hash}`);
           if (res.data.status === 409) {
             SetError('This link already exists');
             SetStatus(409);
