@@ -11,30 +11,22 @@ function LinkShortener() {
     return axios
       .get('http://localhost:5000/api/collection')
       .then((response) => {
-        console.log('success');
         return response;
       })
       .catch((err) => {
-        console.log('error fetching data');
+        console.log('Error Fetching Data');
         return { status: 500 };
       });
   };
 
   async function fetchData() {
     const response = await getLinks();
-    console.log(response);
     if (response.status === 200) {
       SetData(response.data);
     }
   }
 
-  function refreshLinks() {
-    console.log('refresh Called');
-    // fetchData();
-  }
-
   useEffect(() => {
-    console.log('Called');
     fetchData();
   }, []);
 
