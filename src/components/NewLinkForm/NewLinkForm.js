@@ -3,6 +3,7 @@ import './NewLinkForm.css';
 import axios from 'axios';
 import validator from 'validator';
 import refreshLinks from '../LinkShortener/LinkShortener';
+import { API_ORIGIN } from '../util';
 
 function NewLinkForm(props) {
   const [url, SetUrl] = useState('');
@@ -34,13 +35,10 @@ function NewLinkForm(props) {
       console.log('URL is: ', url);
       // POST Values.
       axios
-        .post(
-          'http://localhost:5001/link-shortener-dradh/us-central1/api/api/shorten',
-          {
-            url: url,
-            customext: customext,
-          }
-        )
+        .post(`${API_ORIGIN}/api/shorten`, {
+          url: url,
+          customext: customext,
+        })
         .then((res) => {
           console.log(res.data);
           let currentUrl = window.location.origin;

@@ -3,15 +3,14 @@ import './LinkShortener.css';
 import NewLinkForm from '../NewLinkForm/NewLinkForm';
 import AllLinks from '../AllLinks/AllLinks';
 import axios from 'axios';
+import { API_ORIGIN } from '../util';
 
 function LinkShortener() {
   const [data, SetData] = useState([]);
 
   const getLinks = async () => {
     return axios
-      .get(
-        'http://localhost:5001/link-shortener-dradh/us-central1/api/api/collection'
-      )
+      .get(`${API_ORIGIN}/api/collection`)
       .then((response) => {
         return response;
       })
