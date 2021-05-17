@@ -1,13 +1,22 @@
+# link-shortener
+
+A streamlined URL Shortening service built using NodeJS with the admin console UI build on ReactJS
+
+## Screenshots
+<p align="center"><img src="https://i.imgur.com/ZkaZ8St.png" alt="ss"/></p>
+<p align="center"><img src="https://i.imgur.com/4VtMqb1.png" alt="ss"/></p>
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
+### `firebase emulators:start`
 
 Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
